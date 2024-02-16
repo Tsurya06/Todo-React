@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterSlice from './redux/features/counter/slice';
-import TodoSlice from './redux/features/todo/todo-slice';
-import chuckNorris from './redux/features/todo/chuck-norris-slice';
+import TodoSlice from './features/reducers/todo-slice';
+import chuckNorris from './features/reducers/chuck-norris-slice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterSlice,
     todos: TodoSlice, 
     chuckNorris: chuckNorris
   },
