@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useTodoDispatch, useTodoSelector } from "../redux/hooks/todo-hook";
+import { useTodoDispatch, useTodoSelector } from "../store/hooks/todo-hook";
 import "./styles.css";
 import axios from "axios";
 import {
   addTodo,
   editTodo,
   removeTodo,
-} from "../redux/features/reducers/todo-slice";
-import { ChuckNorris, Todo } from "../redux/todoItems/models";
+} from "../store/features/reducers/todo-slice";
+import { ChuckNorris, Todo } from "../store/todoItems/models";
 import {
   DisplayJoke,
   DisplayHindiJoke,
-} from "../redux/features/reducers/chuck-norris-slice";
+} from "../store/features/reducers/chuck-norris-slice";
 import { fetchData, fetchHindiJoke } from "../apiCall/chuckNorrisApi";
 import { Row, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
