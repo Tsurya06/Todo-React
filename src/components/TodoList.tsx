@@ -6,12 +6,12 @@ import {
   addTodo,
   editTodo,
   removeTodo,
-} from "../redux/features/todo/todo-slice";
+} from "../redux/features/reducers/todo-slice";
 import { ChuckNorris, Todo } from "../redux/todoItems/models";
 import {
   DisplayJoke,
   DisplayHindiJoke,
-} from "../redux/features/todo/chuck-norris-slice";
+} from "../redux/features/reducers/chuck-norris-slice";
 import { fetchData, fetchHindiJoke } from "../apiCall/chuckNorrisApi";
 import { Row, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
@@ -153,11 +153,11 @@ export const TodoList: React.FC = () => {
         <h1>Todo List</h1>
         <div className="input-container">
           <input value={text} onChange={onChangeInput} required />
-          </div>  
-        <div className="input-container">  
+        </div>
+        <div className="input-container">
           <button onClick={addTask}>Save</button>
         </div>
-          {/* <div>
+        {/* <div>
           {chuckTodo.chuckTodos.map((chuckTodo) => (
             <ul>
               <li key={chuckTodo.id}>{chuckTodo.value}</li>
@@ -165,102 +165,100 @@ export const TodoList: React.FC = () => {
             </ul>
           ))}
         </div> */}
-      
+
         <Table columns={columns} dataSource={todoState} pagination={false} />
         <div>
-  {todo.todos.map((todoItem) =>
-    todoItem.completed ? (
-      <div key={todoItem.id} style={{ display: "flex", width: "100%" }}>
-        <div style={{ width: "100%" }}>
-          <input
-            value={todoItem.text}
-            disabled
-            style={{
-              width: "100%",
-              padding: "8px",
-              border: "1px solid #ccc",
-              borderRadius: "4px",
-              marginRight: "8px",
-            }}
-          />
+          {todo.todos.map((todoItem) =>
+            todoItem.completed ? (
+              <div key={todoItem.id} style={{ display: "flex", width: "100%" }}>
+                <div style={{ width: "100%" }}>
+                  <input
+                    value={todoItem.text}
+                    disabled
+                    style={{
+                      width: "100%",
+                      padding: "8px",
+                      border: "1px solid #ccc",
+                      borderRadius: "4px",
+                      marginRight: "8px",
+                    }}
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <button
+                    onClick={() => editTask(todoItem.id)}
+                    style={{
+                      padding: "8px 12px",
+                      backgroundColor: "#5062a7",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "4px",
+                      marginRight: "4px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => removeTask(todoItem.id)}
+                    style={{
+                      padding: "8px 12px",
+                      backgroundColor: "#dc3545",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div key={todoItem.id}>
+                <input
+                  value={newText[todoItem.id]}
+                  onChange={(event) => onChangeNewInput(todoItem.id, event)}
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "8px",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    marginRight: "8px",
+                  }}
+                />
+                <button
+                  onClick={() => saveTask(todoItem.id)}
+                  style={{
+                    padding: "8px 12px",
+                    backgroundColor: "#5062a7",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "4px",
+                    marginRight: "4px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => removeTask(todoItem.id)}
+                  style={{
+                    padding: "8px 12px",
+                    backgroundColor: "#dc3545",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            )
+          )}
         </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <button
-            onClick={() => editTask(todoItem.id)}
-            style={{
-              padding: "8px 12px",
-              backgroundColor: "#5062a7",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              marginRight: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => removeTask(todoItem.id)}
-            style={{
-              padding: "8px 12px",
-              backgroundColor: "#dc3545",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Delete
-          </button>
-        </div>
-      </div>
-    ) : (
-      <div key={todoItem.id}>
-        <input
-          value={newText[todoItem.id]}
-          onChange={(event) => onChangeNewInput(todoItem.id, event)}
-          required
-          style={{
-            width: "100%",
-            padding: "8px",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-            marginRight: "8px",
-          }}
-        />
-        <button
-          onClick={() => saveTask(todoItem.id)}
-          style={{
-            padding: "8px 12px",
-            backgroundColor: "#5062a7",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            marginRight: "4px",
-            cursor: "pointer",
-          }}
-        >
-          Update
-        </button>
-        <button
-          onClick={() => removeTask(todoItem.id)}
-          style={{
-            padding: "8px 12px",
-            backgroundColor: "#dc3545",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-          Delete
-        </button>
-      </div>
-    )
-  )}
-</div>
-
-
       </div>
     </>
   );
