@@ -1,0 +1,76 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+  }
+  
+  .input-container input {
+    width: calc(100% - 80px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .input-container button {
+    padding: 10px 20px;
+    background-color: #5062a7;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .task-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .task-item {
+    margin-bottom: 10px;
+  }
+  
+  .task-item input {
+    width: calc(100% - 120px);
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .task-item button {
+    padding: 5px 10px;
+    background-color: #6352c0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .table-container {
+    margin-top: 20px;
+  }
+  
+  .ant-table {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .ant-table thead > tr > th {
+    background-color: #0FA374;
+    color: #fff;
+    border: none;
+  }
+  
+  .ant-table-tbody > tr > td {
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .ant-table-tbody > tr:last-child > td {
+    border-bottom: none;
+  }
+  
