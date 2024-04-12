@@ -18,7 +18,6 @@ import { ColumnsType } from "antd/es/table";
 import { type } from "@testing-library/user-event/dist/type";
 
 export type Joke = {
-  id?: string;
   jokeNo?: string;
   jokeContent?: string;
   value?: string;
@@ -48,13 +47,14 @@ export const TodoList: React.FC = () => {
   };
 
   const addTask = () => {
+    const body={
+      id: Date.now(),
+      text: text.trim(),
+      completed: true,
+    }
     if (text !== "") {
       todoDispatch(
-        addTodo({
-          id: Date.now(),
-          text: text.trim(),
-          completed: true,
-        })
+        addTodo(body)
       );
       setText("");
     }
@@ -96,15 +96,14 @@ export const TodoList: React.FC = () => {
       console.log(savedTodo);
     }
   };
-
+  //chuckNorris joke
   async function fetchJokeApi() {
     let responseData = await fetchData();
     const joke = {
-      id: responseData.jokeNo,
-      value: responseData.jokeContent,
+      value: responseData.value,
     };
     console.log(joke);
-    setTodoState((prevTodoState) => [...prevTodoState, joke]);
+    setTodoState([joke]);
     console.log("fetched Data: => ", responseData);
     todoDispatch(DisplayJoke(responseData));
   }
@@ -122,27 +121,36 @@ export const TodoList: React.FC = () => {
   }
 
   useEffect(() => {
-    // fetchJokeApi();
-    fetchHindiJokeApi();
+    fetchJokeApi();
+    // fetchHindiJokeApi();
   }, [todo]);
 
   const columns: ColumnsType<Joke> = [
-    {
-      title: "Joke No",
-      dataIndex: "jokeNo" || "id",
-      key: "jokeNo" || "id",
-      render: (jokeNo) => (
-        <div key={jokeNo} style={{ color: "#0FA374" }}>
-          {jokeNo}
-        </div>
-      ),
-    },
+    // {
+    //   title: "Joke No",
+    //   dataIndex: "jokeNo",
+    //   key: "jokeNo",
+    //   render: (jokeNo) => (
+    //     <div key={jokeNo} style={{ color: "#0FA374" }}>
+    //       {jokeNo}
+    //     </div>
+    //   ),
+    // },
+    // {
+    //   title: "Jokes",
+    //   dataIndex: "jokeContent",
+    //   key: "jokeNo",
+    //   render: (text: string, todoState) => (
+    //     <div key={todoState.jokeNo}>{text}</div>
+    //   ),
+    // },
+
     {
       title: "Jokes",
-      dataIndex: "jokeContent" || "value",
-      key: "jokeNo" || "value",
-      render: (text: string, todoState) => (
-        <div key={todoState.jokeNo}>{text}</div>
+      dataIndex: "value",
+      key: "value",
+      render: (text: string) => (
+        <div>{text}</div>
       ),
     },
   ];
@@ -150,7 +158,7 @@ export const TodoList: React.FC = () => {
   return (
     <>
       <div className="container">
-        <h1>Todo List</h1>
+        <h1>Funny Todo List</h1>
         <div className="input-container">
           <input value={text} onChange={onChangeInput} required />
         </div>
